@@ -1,5 +1,10 @@
 #include <iostream>
 
+enum class Operation{
+    plus,
+    minus
+};
+
 void checkCin(){
     if (std::cin.fail()){
         std::cout << "\nerror\n";
@@ -8,43 +13,50 @@ void checkCin(){
 }
 
 double getNumber(std::string name){
-    std::cout << "vvedit chislo " << name << ": ";
+    std::cout << "input number " << name << ": ";
     double a = 0;
     std::cin >> a;
     checkCin();
     return a;
 }
 
-int main()
-{
+Operation getOperation(){
     int op = 0;
 
-    std::cout << "viberit operaciu(1 - plus; 2 - minus): ";
+    std::cout << "enter operation (1 - plus, 2 - minus): ";
     std::cin >> op;
 
     checkCin();
-    if((op!=1 && op!=2)){
-        std::cout << "\nerror\n";
-        return 1;
-    }
-
-    double a = getNumber("a");
-    double b = getNumber("b");
 
     switch (op) {
     case 1:
-        std::cout << a+b;
-        break;
-
+        return Operation::plus;
     case 2:
-        std::cout << a-b;
-        break;
-
+        return Operation::minus;
     default:
         std::cout << "\nerror\n";
-        break;
+        exit(1);
     }
-    std::cout << '\n';
+}
 
+void Calculate(double a, double b, Operation op){
+    switch (op) {
+    case Operation::plus:
+        std::cout << a+b << "\n";
+        return;
+    case Operation::minus:
+        std::cout << a-b << "\n";
+        return;
+    }
+    std::cout << "\nerror\n";
+    exit(1);
+}
+
+int main()
+{
+    Operation op = getOperation();
+    double a = getNumber("a");
+    double b = getNumber("b");
+    Calculate(a,b,op);
     return 0;
 }
