@@ -2,7 +2,9 @@
 
 enum class Operation{
     plus,
-    minus
+    minus,
+    multiply,
+    division
 };
 
 void checkCin(){
@@ -23,7 +25,7 @@ double getNumber(std::string name){
 Operation getOperation(){
     int op = 0;
 
-    std::cout << "enter operation (1 - plus, 2 - minus): ";
+    std::cout << "enter operation (1-plus,2-minus,3-multiply,4-division): ";
     std::cin >> op;
 
     checkCin();
@@ -33,6 +35,10 @@ Operation getOperation(){
         return Operation::plus;
     case 2:
         return Operation::minus;
+    case 3:
+        return Operation::multiply;
+    case 4:
+        return Operation::division;
     default:
         std::cout << "\nerror\n";
         exit(1);
@@ -47,6 +53,12 @@ void Calculate(double a, double b, Operation op){
     case Operation::minus:
         std::cout << a-b << "\n";
         return;
+    case Operation::multiply:
+        std::cout << a*b << "\n";
+        return;
+    case Operation::division:
+        std::cout << a/b << "\n";
+        return;
     }
     std::cout << "\nerror\n";
     exit(1);
@@ -54,8 +66,8 @@ void Calculate(double a, double b, Operation op){
 
 int main()
 {
-    Operation op = getOperation();
     double a = getNumber("a");
+    Operation op = getOperation();
     double b = getNumber("b");
     Calculate(a,b,op);
     return 0;
