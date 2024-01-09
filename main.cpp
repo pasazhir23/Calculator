@@ -23,21 +23,21 @@ double getNumber(std::string name){
 }
 
 Operation getOperation(){
-    int op = 0;
+    char op = 0;
 
-    std::cout << "enter operation (1-plus,2-minus,3-multiply,4-division): ";
+    std::cout << "enter operation (+ | - | * | /): ";
     std::cin >> op;
 
     checkCin();
 
     switch (op) {
-    case 1:
+    case '+':
         return Operation::plus;
-    case 2:
+    case '-':
         return Operation::minus;
-    case 3:
+    case '*':
         return Operation::multiply;
-    case 4:
+    case '/':
         return Operation::division;
     default:
         std::cout << "\nerror\n";
