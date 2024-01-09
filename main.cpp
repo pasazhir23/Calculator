@@ -1,74 +1,14 @@
 #include <iostream>
-
-enum class Operation{
-    plus,
-    minus,
-    multiply,
-    division
-};
-
-void checkCin(){
-    if (std::cin.fail()){
-        std::cout << "\nerror\n";
-        exit(1);
-    }
-}
-
-double getNumber(std::string name){
-    std::cout << "input number " << name << ": ";
-    double a = 0;
-    std::cin >> a;
-    checkCin();
-    return a;
-}
-
-Operation getOperation(){
-    char op = 0;
-
-    std::cout << "enter operation (+ | - | * | /): ";
-    std::cin >> op;
-
-    checkCin();
-
-    switch (op) {
-    case '+':
-        return Operation::plus;
-    case '-':
-        return Operation::minus;
-    case '*':
-        return Operation::multiply;
-    case '/':
-        return Operation::division;
-    default:
-        std::cout << "\nerror\n";
-        exit(1);
-    }
-}
-
-void Calculate(double a, double b, Operation op){
-    switch (op) {
-    case Operation::plus:
-        std::cout << a+b << "\n";
-        return;
-    case Operation::minus:
-        std::cout << a-b << "\n";
-        return;
-    case Operation::multiply:
-        std::cout << a*b << "\n";
-        return;
-    case Operation::division:
-        std::cout << a/b << "\n";
-        return;
-    }
-    std::cout << "\nerror\n";
-    exit(1);
-}
+#include "Operation.h"
+#include "Tools.h"
 
 int main()
 {
-    double a = getNumber("a");
-    Operation op = getOperation();
-    double b = getNumber("b");
-    Calculate(a,b,op);
+    Operation oper;
+
+    double a = tools::getNumber("a");
+    oper.getOperation();
+    double b = tools::getNumber("b");
+    oper.calculate(a,b);
     return 0;
 }
